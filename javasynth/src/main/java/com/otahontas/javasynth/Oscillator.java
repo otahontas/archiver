@@ -1,16 +1,26 @@
 package com.otahontas.javasynth;
 
+
 public class Oscillator {
     
     private WAVESHAPE waveshape;
     private double samplesPerPeriod;
     private long currentSample;
+    private int sampleRate;
     
     /**
      * Waveshape enumeration
      */   
     public enum WAVESHAPE {
         SIN, SQU, SAW
+    }
+
+    /**
+     * Constructor. Set sin wave to be default with sample rate of 44100
+     */
+    public Oscillator() {
+        this.waveshape = Oscillator.WAVESHAPE.SIN;
+        this.sampleRate = 44100;
     }
     
     /**
@@ -28,8 +38,18 @@ public class Oscillator {
       * @param frequency Frequency in Hz for this oscillator
       * @param sampleRate Sample rate in points per second for oscillator 
       */
-    public void setFrequency(double frequency, int sampleRate) {
-        samplesPerPeriod = (sampleRate  / frequency);
+    public void setFrequency(double frequency) {
+        samplesPerPeriod = (this.sampleRate  / frequency);
+    }
+    
+    /**
+     * Set new sample rate
+     * @param sampleRate Sample rate in points per second for oscillator 
+     * (higher sample rate gives more "full" sound)
+     */
+    
+    public void setSampleRate(int sampleRate) {
+        this.sampleRate = sampleRate;
     }
     
     /** 
@@ -57,20 +77,16 @@ public class Oscillator {
     }
     
     /**
-     * Get a buffer of oscillator samples
+     * Get a buffer of oscillator samples by getting individual point values 
+     * and inserting them into buffer 
      * 
      * @param buffer Array to fill samples in
      * 
      */
-    
-    // TODO: tutki mitä nää tekee
     public void getSamples(byte [] buffer) {
         int index = 0;
         for (int i = 0; i < buffer.length / 2; i++) {
-            
-            double ds = getSample() * Short.MAX_VALUE;
-            short ss = (short) Math.round(ds);
-            
+            short ss = (short) Math.round(getSample() * Short.MAX_VALUE);
             buffer[index++] = (byte)(ss >> 8);
             buffer[index++] = (byte)(ss & 0xFF);
         }

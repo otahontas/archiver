@@ -8,6 +8,7 @@ public class Synth {
     private Scanner scan;
     private Oscillator osc;
     private SamplePlayer player;
+    private int SampleRate = 44100;
     
     /**
      * Constructor for text based ui for this synth
@@ -24,7 +25,18 @@ public class Synth {
     }
     
     public void start() {
-        player.playSamples();
+        osc.setOscWaveshape(Oscillator.WAVESHAPE.SIN);
+        osc.setFrequency(440);
+        player.startPlaying();
+        
+        /* Make oscillator "playable" with stdin
+        String input = scan.nextLine();
+        if (input.equals("s")) {
+            player.startPlaying();
+        } else if (input.equals("d")) {
+            player.stopPlaying();
+        }
+        */
     }
 
 }

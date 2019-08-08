@@ -11,8 +11,7 @@ public class Main {
         
         // Launch text UI
         Synth synth = new Synth(scanner, osc, player);
-        //synth.start();
-
+        synth.start();
         
     }
 

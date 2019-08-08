@@ -8,7 +8,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 
-// TODO: check multithreading stuff later
 public class SamplePlayer {
     
     private AudioFormat format;
@@ -17,10 +16,13 @@ public class SamplePlayer {
     private int bufferSize = 1000;
     private byte [] sampleData = new byte[bufferSize];
     private Oscillator sampleProvider;
+    private volatile boolean cancelled;
+    private Thread playingThread;
     
     /**
      * Constructor for SamplePlayer. By default it uses sample rate of 44100, 
-     * 16 bits per sample, mono channel and signed bigEndian byte order
+     * 16 bits per sample, mono channel and signed bigEndian byte order. 
+     * Dataline info object describes line format 
      * 
      */
 
@@ -39,7 +41,7 @@ public class SamplePlayer {
     }
     
     /**
-     * Set new Samplerate, which also affect audioformat
+     * Set new sample rate, which also affects audioformat
      * @param sampleRate Sample rate in points per second for oscillator 
      * (higher sample rate gives more "full" sound)
      */
@@ -50,25 +52,42 @@ public class SamplePlayer {
     
     /**
      * Get Line to write data to, get samples from sample provider and 
-     * write samples to dataline with offset of 0
+     * write samples to data line with offset of 0.
+     * Use anonymous class syntax to get new Thread to be run
      */
-    public void playSamples() {
-        try {
-            sdline = (SourceDataLine) AudioSystem.getLine(info);
-            sdline.open(format);
-            sdline.start();
-            
-            while(true) {
-                sampleProvider.getSamples(sampleData);
-                sdline.write(sampleData, 0, bufferSize);
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                sdline = (SourceDataLine) AudioSystem.getLine(info);
+                sdline.open(format);
+                sdline.start();
+                
+                while (true) {
+                    sampleProvider.getSamples(sampleData);
+                    sdline.write(sampleData, 0, bufferSize);
+                }
+            } catch (LineUnavailableException lue) {
+                lue.printStackTrace();
+            } finally {
+                sdline.drain();
+                sdline.close();
             }
-            
-        } catch (LineUnavailableException lue) {
-            lue.printStackTrace();
-        } 
+        }
+    };
+    
+    /**
+     * Start player in its own thread so it can be controlled better
+     */
+    public void startPlaying() {
+        playingThread = new Thread(runnable);
+        playingThread.start();
     }
     
-    
-    
-    
+    /**
+     * Stop player and close data line
+     * TODO: fix this one
+     */
+    public void stopPlaying() {
+    }
 }
