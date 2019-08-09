@@ -8,7 +8,9 @@ public class Synth {
     private Scanner scan;
     private Oscillator osc;
     private SamplePlayer player;
+    
     private int SampleRate = 44100;
+    private Frequencies f = new Frequencies();
     
     /**
      * Constructor for text based ui for this synth
@@ -25,8 +27,9 @@ public class Synth {
     }
     
     public void start() {
-        osc.setOscWaveshape(Oscillator.WAVESHAPE.SIN);
-        osc.setFrequency(440);
+        double[] freqs = f.getFreqs();
+        osc.setOscWaveshape(Oscillator.WAVESHAPE.SAW);
+        osc.setFrequency(freqs[0]);
         player.startPlaying();
         
         /* Make oscillator "playable" with stdin
