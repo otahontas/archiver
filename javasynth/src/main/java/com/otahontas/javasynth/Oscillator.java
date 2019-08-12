@@ -1,6 +1,9 @@
 package com.otahontas.javasynth;
 
-
+/**
+ * This class contains oscillator - device that generates waveforms of audio samples
+ * @author otahontas
+ */
 public class Oscillator {
     
     private WAVESHAPE waveshape;
@@ -16,7 +19,7 @@ public class Oscillator {
     }
 
     /**
-     * Constructor. Set sin wave to be default with sample rate of 44100
+     * Constructor. Set sin wave to be default with sample rate 44100hz
      */
     public Oscillator() {
         this.waveshape = Oscillator.WAVESHAPE.SIN;
@@ -36,7 +39,6 @@ public class Oscillator {
       * Set the frequency of the oscillator in Hz.
       *
       * @param frequency Frequency in Hz for this oscillator
-      * @param sampleRate Sample rate in points per second for oscillator 
       */
     public void setFrequency(double frequency) {
         samplesPerPeriod = (this.sampleRate  / frequency);
@@ -77,12 +79,13 @@ public class Oscillator {
     }
     
     /**
-     * Get a buffer of oscillator samples by getting individual point values 
-     * and inserting them into buffer 
+     * Get a buffer of oscillator samples. Method fills buffer with 
+     * samples encoded as bytes in big endian order
+     * and.
      * 
      * @param buffer Array to fill samples in
      * 
-     */
+         */
     public void getSamples(byte [] buffer) {
         int index = 0;
         for (int i = 0; i < buffer.length / 2; i++) {

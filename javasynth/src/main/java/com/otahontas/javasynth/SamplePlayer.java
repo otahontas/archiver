@@ -13,7 +13,7 @@ public class SamplePlayer {
     private AudioFormat format;
     private DataLine.Info info;
     private SourceDataLine sdline;
-    private int bufferSize = 1000;
+    private int bufferSize = 1024;
     private byte [] sampleData = new byte[bufferSize];
     private Oscillator sampleProvider;
     private volatile boolean cancelled;
@@ -79,6 +79,7 @@ public class SamplePlayer {
     /**
      * Start player in its own thread so it can be controlled better
      */
+    
     public void startPlaying() {
         playingThread = new Thread(runnable);
         playingThread.start();
@@ -88,6 +89,7 @@ public class SamplePlayer {
      * Stop player and close data line
      * TODO: fix this one
      */
+    
     public void stopPlaying() {
     }
 }
