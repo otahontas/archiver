@@ -7,6 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import javafx.util.Pair;
 
+import com.otahontas.wavcompressor.datastructures.BitArray;
+
 public class LZWCompressor {
 
     private final List<Byte> rawSamples;
@@ -155,5 +157,4 @@ public class LZWCompressor {
         
         return getSamples();
     }
-
 }
