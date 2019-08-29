@@ -1,4 +1,4 @@
-package com.otahontas.wavcompressor.compressionalgos;
+package com.otahontas.wavcompressor.datastructures;
 
 import java.util.ArrayList;
 import java.util.Arrays;
