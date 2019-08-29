@@ -5,7 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import javafx.util.Pair;
 
-public final class BitArray {
+/**
+ * Manages an array of bit values, which are represented as Booleans, where true indicates that the bit is on (1) and false indicates the bit is off (0).
+ */
+
+public class BitArray {
 
     private final List<Boolean> vals;
 

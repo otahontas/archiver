@@ -53,3 +53,14 @@ xdg-open target/site/jacoco/index.html (Useimmat linux-distrot)
 - [Viikko 3](dokumentaatio/raportit/viikko3.md)
 - [Viikko 4](dokumentaatio/raportit/viikko4.md)
 - [Viikko 5](dokumentaatio/raportit/viikko5.md)
+
+# TODO:
+- Kirjoita uus määrittelydokkari
+- Kirjoita käyttöohje
+- Kirjoita testausdokkari
+- Kirjoita toteutus- ja suorituskykydokkari
+- Siisti metodeita
+- Kirjoita javadocit
+- Tee servicet valmiiksi
+- Testaa, testaa
+- Kirjoita metodit, joilla tehdä testivertailut javan ja omien tietorakenteiden välillä
