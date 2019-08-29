@@ -1,14 +1,33 @@
 package com.otahontas.wavcompressor.datastructures;
 
+/**
+ *
+ * Basic implementation of ArrayList - a resizable array. 
+ * Array does only grow when needed. 
+ * This implementation doesn't shrink array, so memory consumption is a little
+ * bit higher than it should be.
+ * 
+ * @param <T> Type of objects list is going hold, e.g. List<String> = new List<>();
+ */
+
 public class List<T> {
 
     private T[] values;
     private int size;
 
+    /**
+     * Creates new ArrayList with default size of 10.
+     * */
+
     public List() {
         this.values = (T[]) new Object[10];
         this.size = 0;
     }
+
+    /**
+     * Adds new item to the list
+     * @param value Suitable object to add 
+     * */
 
     public void add(T value) {
         if (this.size == this.values.length) {
@@ -19,28 +38,60 @@ public class List<T> {
         this.size++;
     }
 
+    /**
+     * Checks if given item is on the list
+     * @param value Suitable object to check
+     * @return True or false depending on whether object is in list
+     * */
+
     public boolean contains(T value) {
         return indexOfvalue(value) >= 0;
     }
 
-    public void remove(T value) {
-        int indexOfvalue = indexOfvalue(value);
-        if (indexOfvalue < 0) return;
-        moveLeft(indexOfvalue);
-        this.size--;
-    }
+    /**
+     * Returns the item in given index of list. 
+     * Throws IndexOutOfBoundsException if given index is greater than size of 
+     * the list or the index is below zero.
+     *
+     * @param index index where from to return the item
+     * @return the item in given index
+     */
 
-    public T value(int index) {
+    public T get(int index) {
         if (index < 0 || index >= this.size) {
-            throw new ArrayIndexOutOfBoundsException(
+            throw new IndexOutOfBoundsException(
                 "Index " + index + "is outside of scope [0, " + this.size + "]");
         }
         return this.values[index];
     }
 
+    /**
+     * Removes first occurence of object from list if possible
+     * @param Suitable object to remove
+     * @return True if object was removed, otherwise false
+     * */
+
+
+    public boolean remove(T value) {
+        int indexOfvalue = indexOfvalue(value);
+        if (indexOfvalue < 0) return false;
+        moveLeft(indexOfvalue);
+        this.size--;
+        this.values[this.size] = null;
+        return true;
+    }
+
+    /**
+     * Returns the amount of items in this list.
+     *
+     * @return amount of items in list
+     */
+
     public int size() {
         return this.size;
     }
+
+    /* === PRIVATE METHODS === */
 
     private void increaseSize() {
         int newSize = this.values.length + this.values.length / 2;
@@ -62,8 +113,23 @@ public class List<T> {
     }
 
     private void moveLeft(int start) {
+        if (start < 0 || start >= this.size) return;
         for (int i = start; i < this.size - 1; i++) {
             this.values[i] = this.values[i + 1];
         }
+    }
+
+    @Override
+    public String toString() {
+        String output = "[";
+        for (int i = 0; i < this.size; i++) {
+            output += this.values[i];
+            if (i < size - 1) {
+                output += ", ";
+            }
+        }
+        output += "]";
+
+        return output;
     }
 }
