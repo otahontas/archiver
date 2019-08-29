@@ -37,7 +37,7 @@ public class FileIOTest {
                                                       IOException {
         System.setOut(new PrintStream(outContent));
         reader.readWavFile("testfiles/testi");
-        assertEquals("Please give a wav file as an argument",
+        assertEquals("Please give a wav file as an argument\n",
                      outContent.toString());
         System.setOut(originalOut);
     }

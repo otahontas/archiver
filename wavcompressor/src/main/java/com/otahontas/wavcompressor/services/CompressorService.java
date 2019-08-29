@@ -1,70 +1,79 @@
 package com.otahontas.wavcompressor.services;
 
 import com.otahontas.wavcompressor.utils.FileIO;
+import com.otahontas.wavcompressor.utils.WavInfoReader;
 import com.otahontas.wavcompressor.compressionalgos.LZWCompressor;
 import com.otahontas.wavcompressor.compressionalgos.HuffmanCompressor;
+import java.io.IOException;
 
 public class CompressorService {
 
     private LZWCompressor lzw;
     private HuffmanCompressor huffman;
+    private FileIO f;
+    private WavInfoReader wir;
 
     public CompressorService() {
         this.lzw = new LZWCompressor();
         this.huffman = new HuffmanCompressor();
     }
 
-
     public void run(char command, char algo, String source, String output) {
-        System.out.println("run the commands");
-    }
-}
-
-
-/*
-        switch (command) {
-            case 'c':   compressorservice.compress()
-                        break;
-            case 'e':   compressorservice.extract()
-                        break;
-            default:    System.out.println("Invalid flag!\n" + usage);
-            }
-        switch (algo) {
-            case 'l':   lzw.compress()
-                        break;
-            case 'h':   System.out.println("extract!");
-                        break;
-            default:    System.out.println("Invalid flag!\n" + usage);
-            }
-        }
-
-    }
-
-    public void extract (char algo) {
-
-    }
-}
-
-
-
-/*
-    public void compress(String filename) {
-        FileIO f = new FileIO();
+        this.f = new FileIO();
         byte[] dataBytearray = new byte[0];
 
         try {
-            dataBytearray = f.readWavFile(filename);
+            dataBytearray = f.readWavFile(source);
         } catch (IOException ioe) {
-            System.out.println(ioe);
+            System.out.println("Error:" + ioe);
         }
+
+        if (dataBytearray.length == 0) {
+            System.out.println("Couldn't process given input");
+            return;
+        }
+
         WavInfoReader wir = new WavInfoReader(dataBytearray);
         dataBytearray = wir.getDataByteArray();
-        int originalSizeUsed = Byte.SIZE * dataBytearray.length;
-        LZWCompressor lw = new LZWCompressor();
-        lw.addSamples(dataBytearray);
-        byte[] lzwData = lw.compress();
-        int newSizeUsed = Byte.SIZE * lzwData.length;
-        double rate = (double) originalSizeUsed / (double) newSizeUsed;
+
+        byte[] newData = new byte[0];
+
+        switch (command) {
+            case 'c':   newData = compress(algo, dataBytearray);
+                        break;
+            case 'e':   newData = extract(algo, dataBytearray);
+                        break;
+        }
+
+        if (newData.length == 0) {
+            System.out.println("Couldn't compress or extract file given");
+            return;
+        }
+
+        compare(dataBytearray, newData);
+    }
+
+    private byte[] compress(char algo, byte[] dataBytearray) {
+        switch (algo) {
+            case 'l':   lzw.addSamples(dataBytearray);
+                        return lzw.compress();
+            case 'h':   huffman.addSamples(dataBytearray);
+                        return huffman.compress();
+        }
+        return new byte[0];
+    }
+
+    private byte[] extract(char algo, byte[] dataBytearray) {
+        // not yet implemented
+        System.out.println("not yet working");
+        return new byte[0];
+
+    }
+
+    private void compare(byte[] original, byte[] compressed) {
+        int originalSize = Byte.SIZE * original.length;
+        int newSize = Byte.SIZE * compressed.length;
+        double rate = (double) originalSize/ (double) newSize;
         System.out.println("Compression rate: " + rate);
     }
-*/
+}
