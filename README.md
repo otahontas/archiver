@@ -9,7 +9,7 @@ Ohjelmassa on toteutettu kaksi häviötöntä tiedostonpakkausmenetelmää wav-a
 Kloonaus:
 ```
 git clone https://github.com/otahontas/javasynth.git
-mvn wavcompressor
+mv wavcompressor
 ```
 
 Asennus eli jarin generointi:
