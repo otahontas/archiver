@@ -39,6 +39,17 @@ public class List<T> {
     }
 
     /**
+     * Clear list by setting all values to null
+     * */
+
+    public void clear() {
+        for (int i = 0; i < this.size; i++) {
+            this.values[i] = null;
+        }
+
+    }
+
+    /**
      * Checks if given item is on the list
      * @param value Suitable object to check
      * @return True or false depending on whether object is in list
@@ -90,6 +101,44 @@ public class List<T> {
     public int size() {
         return this.size;
     }
+    /** 
+     * Replaces value in given index with new object and returns old object in
+     * that index.
+     *
+     * @param index Index where to set new object
+     * @param obj Object to be set
+     * @return old object from given index, null if it was empty
+     * */
+
+    public T set (int index, T obj) {
+        if (index >= size() || index < 0) {
+            throw new IndexOutOfBoundsException(
+                "Index " + index + "is outside of scope [0, " + this.size + "]");
+        }
+
+        T output = values[index];
+        values[index] = obj;
+
+        return output;
+    }
+
+    /**
+     * Return string presentation for list
+     * */
+
+    @Override
+    public String toString() {
+        String output = "[";
+        for (int i = 0; i < this.size; i++) {
+            output += this.values[i];
+            if (i < size - 1) {
+                output += ", ";
+            }
+        }
+        output += "]";
+
+        return output;
+    }
 
     /* === PRIVATE METHODS === */
 
@@ -119,17 +168,4 @@ public class List<T> {
         }
     }
 
-    @Override
-    public String toString() {
-        String output = "[";
-        for (int i = 0; i < this.size; i++) {
-            output += this.values[i];
-            if (i < size - 1) {
-                output += ", ";
-            }
-        }
-        output += "]";
-
-        return output;
-    }
 }

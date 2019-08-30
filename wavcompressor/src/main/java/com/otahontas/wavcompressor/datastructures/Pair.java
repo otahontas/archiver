@@ -21,7 +21,7 @@ public class Pair<K, V> {
         return key;
     }
 
-    public V geValue() {
+    public V getValue() {
         return value;
     }
 

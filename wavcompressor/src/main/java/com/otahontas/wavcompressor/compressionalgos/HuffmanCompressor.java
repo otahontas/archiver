@@ -10,9 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javafx.util.Pair;
 
 import com.otahontas.wavcompressor.datastructures.BitArray;
+import com.otahontas.wavcompressor.datastructures.Pair;
 
 public class HuffmanCompressor {
 
