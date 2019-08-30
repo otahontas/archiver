@@ -42,10 +42,10 @@ xdg-open target/site/jacoco/index.html (Useimmat linux-distrot)
 
 
 # Dokumentaatio
-- Käyttöhje
+- [Käyttöhje](dokumentaatio/guide.md)
 - [Määrittelydokumentti](dokumentaatio/maarittelydokumentti.md)
-- Testausdokumentti
-- Toteutus- ja suoritituskykydokumentti
+- [Testausdokumentti](dokumentaatio/testausdokumentti.md)
+- [Toteutus- ja suorituskykydokumentti](dokumentaatio/toteutusdokumentti.md)
 
 # Viikkoraportit
 - [Viikko 1](dokumentaatio/raportit/viikko1.md)
