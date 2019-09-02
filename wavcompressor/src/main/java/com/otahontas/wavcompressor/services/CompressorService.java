@@ -64,8 +64,8 @@ public class CompressorService {
         switch (algo) {
             case 'l':   lzw.addSamples(dataBytearray);
                         return lzw.compress();
-            case 'h':   huffman.addSamples(dataBytearray);
-                        return huffman.compress();
+            case 'h':   System.out.println("not yet working");
+                        break;
         }
         return new byte[0];
     }
