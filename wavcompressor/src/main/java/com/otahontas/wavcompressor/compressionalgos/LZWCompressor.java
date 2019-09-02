@@ -1,20 +1,17 @@
 package com.otahontas.wavcompressor.compressionalgos;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
+import java.util.HashMap;
 
 import com.otahontas.wavcompressor.datastructures.Pair;
 import com.otahontas.wavcompressor.datastructures.BitArray;
+import com.otahontas.wavcompressor.datastructures.List;
 
 public class LZWCompressor {
 
     private final List<Byte> rawSamples;
 
     public LZWCompressor() {
-        rawSamples = new ArrayList<>();
+        rawSamples = new List<>();
     }
 
     public List<Byte> getSamples() {
@@ -31,65 +28,20 @@ public class LZWCompressor {
 
     public void addSamples(byte[] samples) {
         for (byte sample : samples) {
-            this.rawSamples.add(sample);
+            addSample(sample);
         }
     }
 
-    public void addSamples(List<Byte> samples) {
-        samples.forEach((sample) -> {
-            this.rawSamples.add(sample);
-        });
-    }
-
-    public void setSamples(byte[] samples) {
-        clearSamples();
-        addSamples(samples);
-    }
-
-    public void setSamples(List<Byte> samples) {
-        clearSamples();
-        addSamples(samples);
-    }
-
-    public Map<String, Integer> getInitialDictionary() {
-        Map<String, Integer> toReturn = new ConcurrentHashMap<>();
+    public HashMap<String, Integer> createDictionary() {
+        HashMap<String, Integer> dict = new HashMap<>();
         for (int i = 0; i < 256; i++) {
-            toReturn.put(Integer.toString(i),  i);
+            dict.put(Integer.toString(i),  i);
         }
-        return toReturn;
+        return dict;
     }
-    
-    BitArray constructDictionaryData(Map<Integer, String> dictionary) {
-        BitArray toReturn = new BitArray();
-
-        BitArray dictSize = new BitArray();
-        String dictSizeAsBits = Integer.toBinaryString(dictionary.size());
-        for (int i = 0; i < dictSizeAsBits.length(); i += 8) {
-            int j;
-            int bitsSet = 0;
-            for (j = i; j < dictSizeAsBits.length() && j < 8; j++) {
-                dictSize.add(dictSizeAsBits.charAt(j) == '1');
-                bitsSet++;
-            }
-            // Append trailing 0's.
-            while (bitsSet != 8) {
-                dictSize.add(false);
-                bitsSet++;
-            }
-            // Add check if more bytes to read.
-            if (j < dictSizeAsBits.length() - 1) {
-                dictSize.add(true);
-            } else {
-                dictSize.add(false);
-            }
-        }
-        
-        return toReturn;
-    }
-
 
     public byte[] compress() {
-        Map<String, Integer> codeWordsDictionary = getInitialDictionary();
+        HashMap<String, Integer> dict = createDictionary();
 
         String p = "";
         BitArray finalOutput = new BitArray();
@@ -101,16 +53,16 @@ public class LZWCompressor {
             } else {
                 currentCodeword = c;
             }
-            if (codeWordsDictionary.containsKey(currentCodeword)) {
+            if (dict.containsKey(currentCodeword)) {
                 p = currentCodeword;
             } else {
-                finalOutput.add(BitArray.intToBitArray(codeWordsDictionary.get(p)));
-                codeWordsDictionary.put(currentCodeword, (int) codeWordsDictionary.size());
+                finalOutput.add(BitArray.intToBitArray(dict.get(p)));
+                dict.put(currentCodeword, (int) dict.size());
                 p = c;
             }
         }
-        if (!rawSamples.isEmpty()) {
-            finalOutput.add(BitArray.intToBitArray(codeWordsDictionary.get(p)));
+        if (rawSamples.size() > 0) {
+            finalOutput.add(BitArray.intToBitArray(dict.get(p)));
         }
         return finalOutput.toByteArray();
     }
@@ -127,8 +79,9 @@ public class LZWCompressor {
             clearSamples();
             return getSamples();
         }
-        Map<Integer, String> reversedCodeWordsDict = getInitialDictionary().entrySet().stream().collect(
-                        Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+
+        //TODO: create reverse method for this
+        HashMap<Integer, String> reversedCodeWordsDict = new HashMap<>();
         
         BitArray data = new BitArray(compressionResultsAsBytes);
         if (data.size() == 0) {

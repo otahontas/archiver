@@ -76,7 +76,7 @@ public class WavInfoReader {
 
             biggestSample = sampleMax > sampleMin ? sampleMax : Math.abs(((double) sampleMin));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("error: " + e);
         }
     }
 

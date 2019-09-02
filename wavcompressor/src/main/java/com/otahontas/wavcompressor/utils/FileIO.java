@@ -1,9 +1,10 @@
 package com.otahontas.wavcompressor.utils;
 
 import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.IOException;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.io.IOException;
 
 /**
  * Util that handles reading from wav file
@@ -14,7 +15,7 @@ public class FileIO {
     /**
      * Reads wav file and parses possible errors
      * @param filename Path to file
-     * @return was file as an array of bytes
+     * @return waw file as an array of bytes
      * @throws NoSuchFileException when given file doesn't exist
      * @throws IOException when reading the given file doesn't work
      */
@@ -30,8 +31,13 @@ public class FileIO {
         return Files.readAllBytes(Paths.get(filename));
     }
 
-    public void writeWavFile(String filename) {
+    public byte[] readFile (String filename) throws NoSuchFileException,
+           IOException {
+        return Files.readAllBytes(Paths.get(filename));
+    }
 
+    public void writeFile(String filename, byte[] bytesToWrite) throws IOException {
+        Files.write(Paths.get(filename), bytesToWrite, StandardOpenOption.CREATE);
     }
 
     private String getExtension(String filename) {

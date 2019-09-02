@@ -102,13 +102,6 @@ public class BitArray {
         return newString;
     }
 
-    /*public String toBitString() {
-        String newString = "";
-            newString = vals.stream().map((bit) -> bit ? "1" : "0").reduce(newString, String::concat);
-            return newString;
-        }
-    */
-
     public static BitArray intToBitArray(int val) {
         boolean isNegative = val < 0;
         val = Math.abs(val);

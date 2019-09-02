@@ -14,6 +14,7 @@ public class CompressorService {
     private WavInfoReader wir;
 
     public CompressorService() {
+        //TODO: make interface for these
         this.lzw = new LZWCompressor();
         this.huffman = new HuffmanCompressor();
     }
@@ -23,7 +24,7 @@ public class CompressorService {
         byte[] dataBytearray = new byte[0];
 
         try {
-            dataBytearray = f.readWavFile(source);
+            dataBytearray = f.readFile(source);
         } catch (IOException ioe) {
             System.out.println("Error:" + ioe);
         }
@@ -33,8 +34,8 @@ public class CompressorService {
             return;
         }
 
-        WavInfoReader wir = new WavInfoReader(dataBytearray);
-        dataBytearray = wir.getDataByteArray();
+        //wir = new WavInfoReader(dataBytearray);
+        //dataBytearray = wir.getDataByteArray();
 
         byte[] newData = new byte[0];
 
@@ -48,6 +49,12 @@ public class CompressorService {
         if (newData.length == 0) {
             System.out.println("Couldn't compress or extract file given");
             return;
+        }
+
+        try {
+            f.writeFile(output, newData);
+        } catch (IOException ioe) {
+            System.out.println("Error:" + ioe);
         }
 
         compare(dataBytearray, newData);

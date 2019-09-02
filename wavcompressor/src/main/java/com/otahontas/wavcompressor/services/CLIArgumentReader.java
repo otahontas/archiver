@@ -7,8 +7,8 @@ public class CLIArgumentReader {
     private static CompressorService cs = new CompressorService();
     private static String info = "A CLI tool to compress and uncompress wav files";
     private static String usage =
-        "Usage: java jar wavcompressor.jar [-opts] source dest\n"
-        +"e.g. java jar wavcompressor.jar -lc orig.wav comp.wav\n"
+        "Usage: java -jar wavcompressor.jar [-opts] source dest\n"
+        +"e.g. java -jar wavcompressor.jar -lc orig.wav comp.wav\n"
         +"Opts:\n"
         +"-l Use LZW compression \t -h Use Huffman compression\n"
         +"-c Compress file \t -e Exctract file";
