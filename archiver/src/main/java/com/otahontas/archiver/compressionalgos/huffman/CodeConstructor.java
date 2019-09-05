@@ -1,8 +1,8 @@
 package com.otahontas.archiver.compressionalgos.huffman;
 
+import com.otahontas.archiver.datastructures.List;
 import com.otahontas.archiver.datastructures.huffman.HuffmanTree;
 import com.otahontas.archiver.datastructures.huffman.Node;
-import com.otahontas.archiver.datastructures.List;
 
 /**
  * Class that constructs codewords from {@link HuffmanTree}. 
@@ -14,24 +14,26 @@ public class CodeConstructor {
     private List<Boolean>[] codewords;
     private List<Boolean> treePreOrder;
     private List<Byte> values;
-    
+
     /**
-     * Constructs object, calls for forming codewords and right preorder
-     * to {@link HuffmanTree}
-     * @param hufftree Huffman Tree to construct codes from
+     * Create initial array table with place for each bytes codeword
+     * Initialize lists for preorder and values so they can be saved to huffman tree
      * */
  
-    public CodeConstructor(HuffmanTree hufftree) {
+    public CodeConstructor() {
         this.codewords = (List<Boolean>[]) new List[256];
         this.treePreOrder = new List<>();
         this.values = new List<>();
-        formCodeWords(hufftree.getRoot(), new List<Boolean>());
+    }
+
+    public void constructCodeWordsPreorderAndNodeValues(HuffmanTree hufftree) {
+        formCodeWordsRecursively(hufftree.getRoot(), new List<Boolean>());
         hufftree.setTreePreOrder(treePreOrder);
         hufftree.setValues(values);
     }
 
     /**
-     * Gets all codewords from given huffmantree
+     * Gets codewords
      * @return Array of codewords as lists
      */
 
@@ -39,27 +41,26 @@ public class CodeConstructor {
         return this.codewords;
     }
 
-    /* === PRIVATE METHODS === */
-
     /**
-     * Forms codewords recursively and construct preorder traversal guide
-     * as boolean list
-     * @param node Root node
-     * @param code codeword from current path
+     * Forms codewords recursively, construct pre-order traversal guide as a boolean list,
+     * and collect values from Nodes with values
+     * Fixes codewords array to have proper indexing by adding 128 to each byte value
+     * @param node Root of (sub)tree
+     * @param code List containing codeword from current path
      */
 
-    private void formCodeWords(Node node, List<Boolean> code) {
+    private void formCodeWordsRecursively(Node node, List<Boolean> code) {
         if (node == null) return;
 
         if (node.getValue() != 128) {
             treePreOrder.add(true);
-            values.add((byte) (node.getValue() - 128));
+            values.add((byte) (node.getValue()));
         } else {
             treePreOrder.add(false);
         }
 
         if (node.getLeftChild() == null && node.getRightChild() == null) { 
-            codewords[node.getValue()] = code;
+            codewords[node.getValue() + 128] = code;
         }
         List<Boolean> left = new List<>();
         List<Boolean> right = new List<>();
@@ -67,18 +68,19 @@ public class CodeConstructor {
         try {
             left = (List<Boolean>) code.clone();
         } catch (CloneNotSupportedException e) {
+            System.out.println("Could not clone list when creating codewords");
             System.out.println(e);
         }
         try {
             right = (List<Boolean>) code.clone();
         } catch (CloneNotSupportedException e) {
+            System.out.println("Could not clone list when creating codewords");
             System.out.println(e);
         }
 
         left.add(false);
         right.add(true);
-        formCodeWords(node.getLeftChild(),left);
-        formCodeWords(node.getRightChild(),right);
+        formCodeWordsRecursively(node.getLeftChild(),left);
+        formCodeWordsRecursively(node.getRightChild(),right);
     }
-
 }

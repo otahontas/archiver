@@ -1,6 +1,5 @@
 package com.otahontas.archiver.datastructures.huffman;
 
-import com.otahontas.archiver.datastructures.huffman.Node;
 import com.otahontas.archiver.datastructures.List;
 
 /**
@@ -20,7 +19,7 @@ public class HuffmanTree {
      * @param priorityqueue
      */
     
-    public void formHuffmanTree(MinimumPriorityQueue priorityqueue) {
+    public void formHuffmanTreeForEncoding(MinimumPriorityQueue priorityqueue) {
         while (priorityqueue.getSize() > 1) {
             Node x = priorityqueue.popMinimumElement();
             Node y = priorityqueue.popMinimumElement();
@@ -53,9 +52,9 @@ public class HuffmanTree {
             }
             if (preorder.get(i)) {
                 if (parent.getLeftChild() == null) {
-                    parent.setLeftChild(new Node(128,nodevalues[valuesIndex++]+128));
+                    parent.setLeftChild(new Node(128,nodevalues[valuesIndex++]));
                 } else {
-                    parent.setRightChild(new Node(128,nodevalues[valuesIndex++]+128));
+                    parent.setRightChild(new Node(128,nodevalues[valuesIndex++]));
                 }
             } else {
                 if (parent.getLeftChild() == null) {
@@ -110,12 +109,4 @@ public class HuffmanTree {
         }
         return values;
     }
-
-    /** 
-     * Return amount of values in tree encoded as signed byte value
-     * */
-    public byte getAmountOfValues() {
-        return (byte) (values.size() - 128);
-    }
-
 }

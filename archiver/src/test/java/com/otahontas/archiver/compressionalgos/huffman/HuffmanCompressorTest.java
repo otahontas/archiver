@@ -33,9 +33,7 @@ public class HuffmanCompressorTest {
         byte[] decompressed = hc.decompress(compressed);
         assertEquals(array.length,decompressed.length);
 
-       for (int i = 0; i < array.length; i++) {
-           assertEquals(array[i], decompressed[i]);
-        }
+        assertArrayEquals(array, decompressed);
     }
 
     @Test
@@ -49,8 +47,6 @@ public class HuffmanCompressorTest {
         byte[] decompressed = hc.decompress(compressed);
         assertEquals(array.length,decompressed.length);
 
-       for (int i = 0; i < array.length; i++) {
-           assertEquals(array[i], decompressed[i]);
-        }
+        assertArrayEquals(array, decompressed);
     }
 }

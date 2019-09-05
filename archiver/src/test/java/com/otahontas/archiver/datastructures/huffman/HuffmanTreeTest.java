@@ -28,17 +28,17 @@ public class HuffmanTreeTest {
     public void treeIsBuiltCorrectlyWithOnlyOneElement() {
         byte[] array = { 10 };
         nodequeue = freqcalc.createNodeQueue(array);
-        huffmantree.formHuffmanTree(nodequeue);
+        huffmantree.formHuffmanTreeForEncoding(nodequeue);
 
         Node n = huffmantree.getRoot();
 
-        assertEquals(10+128, n.getValue());
+        assertEquals(10, n.getValue());
     }
 
     @Test(expected=ArrayIndexOutOfBoundsException.class)
     public void treeBuildingFailsWithZeroElements() {
         nodequeue.popMinimumElement();
-        huffmantree.formHuffmanTree(nodequeue);
+        huffmantree.formHuffmanTreeForEncoding(nodequeue);
     }
 
     /**
@@ -55,7 +55,7 @@ public class HuffmanTreeTest {
                          69,69,69,69,69};
 
         nodequeue = freqcalc.createNodeQueue(array);
-        huffmantree.formHuffmanTree(nodequeue);
+        huffmantree.formHuffmanTreeForEncoding(nodequeue);
 
         Node n = huffmantree.getRoot();
         Node leftmost = n.getLeftChild().getLeftChild().getLeftChild();
@@ -63,9 +63,9 @@ public class HuffmanTreeTest {
 
         assertEquals(20,n.getFrequency());
         assertEquals(1,leftmost.getFrequency());
-        assertEquals(66+128,leftmost.getValue());
+        assertEquals(66,leftmost.getValue());
         assertEquals(6,rightmost.getFrequency());
-        assertEquals(67+128,rightmost.getValue());
+        assertEquals(67,rightmost.getValue());
     }
 
 
@@ -84,7 +84,7 @@ public class HuffmanTreeTest {
         for (int i = 95; i < 100; i++) array[i] = 70;
 
         nodequeue = freqcalc.createNodeQueue(array);
-        huffmantree.formHuffmanTree(nodequeue);
+        huffmantree.formHuffmanTreeForEncoding(nodequeue);
 
         Node n = huffmantree.getRoot();
         Node leftmost = n.getLeftChild();
@@ -93,11 +93,11 @@ public class HuffmanTreeTest {
 
         assertEquals(100,n.getFrequency());
         assertEquals(45,leftmost.getFrequency());
-        assertEquals(65+128,leftmost.getValue());
+        assertEquals(65,leftmost.getValue());
         assertEquals(5,bottomLeft.getFrequency());
-        assertEquals(70+128,bottomLeft.getValue());
+        assertEquals(70,bottomLeft.getValue());
         assertEquals(9,bottomRight.getFrequency());
-        assertEquals(69+128,bottomRight.getValue());
+        assertEquals(69,bottomRight.getValue());
     }
 
     @Test
@@ -121,8 +121,8 @@ public class HuffmanTreeTest {
         Node leftmost = huffmantree.getRoot().getLeftChild().getLeftChild().getLeftChild().getLeftChild();
         Node rightmost = huffmantree.getRoot().getRightChild().getRightChild();
 
-        assertEquals(values[0],leftmost.getValue() - 128);
-        assertEquals(values[values.length - 1],rightmost.getValue() - 128);
+        assertEquals(values[0],leftmost.getValue());
+        assertEquals(values[values.length - 1],rightmost.getValue());
     }
 
     @Test

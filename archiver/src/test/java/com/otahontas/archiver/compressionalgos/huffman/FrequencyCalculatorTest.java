@@ -30,7 +30,7 @@ public class FrequencyCalculatorTest {
         Node minimum = result.popMinimumElement();
 
         assertEquals(3, minimum.getFrequency());
-        assertEquals(-10+128, minimum.getValue());
+        assertEquals(-10, minimum.getValue());
     }
 
     @Test 
@@ -52,6 +52,6 @@ public class FrequencyCalculatorTest {
         Node minimum = result.popMinimumElement();
 
         assertEquals(freq, minimum.getFrequency());
-        assertEquals(0+128, minimum.getValue());
+        assertEquals(0, minimum.getValue());
     }
 }
