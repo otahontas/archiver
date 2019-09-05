@@ -45,8 +45,21 @@ public class HuffmanCompressorTest {
 
         byte[] compressed = hc.compress(array);
         byte[] decompressed = hc.decompress(compressed);
-        assertEquals(array.length,decompressed.length);
 
+        assertEquals(array.length,decompressed.length);
+        assertArrayEquals(array, decompressed);
+    }
+
+    @Test
+    public void TestThatDataIsSameForFileWithOneOfEachByte() {
+        byte[] array = new byte[256];
+        for (int i = 0; i < 256; i++) {
+            array[i] = (byte) (i - 128);
+        }
+        byte[] compressed = hc.compress(array);
+        byte[] decompressed = hc.decompress(compressed);
+
+        assertEquals(array.length,decompressed.length);
         assertArrayEquals(array, decompressed);
     }
 }

@@ -71,16 +71,9 @@ public class HuffmanCompressor implements CompressionAlgo {
 
     public byte[] decompress(byte[] dataToDecompress) {
 
-        System.out.println("First bytes:");
-        for (int i = 0; i < 4; i++) {
-            System.out.println(dataToDecompress[i]);
-        }
-
         short[] header = collectHeaderInformationForDecompression(dataToDecompress);
 
         byte[] nodevalues = new byte[header[1]];
-        System.out.println("amount of nodes in this tree is: " + header[0]);
-        System.out.println("amount of nodes with values in this tree is: " + header[1]);
         for (int i = 0; i < header[1]; i++) nodevalues[i] = dataToDecompress[i + 4];
 
         int headerSize = 4 + nodevalues.length;
@@ -112,7 +105,6 @@ public class HuffmanCompressor implements CompressionAlgo {
         header[0] = treeSize[0];
         header[1] = treeSize[1];
         header[2] = (byte) (valuesSize - 129);
-        System.out.println("values size inside method: " + header[2]);
         header[3] = (byte) (8 - ((hufftree.GetTreeSize() + sizeOfCompressedBits) % 8));
         return header;
     }
