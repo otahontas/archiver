@@ -57,6 +57,7 @@ public class List<T> implements Cloneable {
 	public Object clone() throws CloneNotSupportedException {  
         List<T> list = (List<T>) super.clone();
         list.values = this.values.clone();
+        list.size = this.size;
 		return list;
 	}
 
@@ -162,7 +163,7 @@ public class List<T> implements Cloneable {
     public T set (int index, T obj) {
         if (index >= size() || index < 0) {
             throw new IndexOutOfBoundsException(
-                "Index " + index + "is outside of scope [0, " + this.size + "]");
+                "Index " + index + " is outside of scope [0, " + this.size + "]");
         }
 
         T output = values[index];
