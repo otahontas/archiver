@@ -39,7 +39,7 @@ xdg-open target/site/jacoco/index.html (Most linux distros)
 - [User guide](documentation/guide.md)
 - [Project definition](documentation/definition.md)
 - [Testing and performance documentation](documentation/testingandperformance.md)
-- [Implementdefinitionation document](documentation/implementation.md)
+- [Implementation document](documentation/implementation.md)
 
 # TODO
 - LZW loppuun
