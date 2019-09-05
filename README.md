@@ -1,67 +1,53 @@
-# Tiedostonpakkaustyökalu wav-tiedostoille
+# CLI archiver program
 
-Tiralabra, loppukesä 2019.
+This repo contains an archive tool implemented with both [Lempel-Ziw-Welch (LWZ)](https://en.wikipedia.orga/wiki/Lempel–Ziv–Welch) and [Huffman](https://en.wikipedia.org/wiki/Huffman_coding) algorithms. Tool relies on packing files on byte level so it should work for any kind of files. Program follows usual Unix CLI tool conventions with flags and targets. 
 
-Ohjelmassa on toteutettu kaksi häviötöntä tiedostonpakkausmenetelmää wav-audiotiedostoille (ohjelman tulisi toimia myös muuntyyppisillä tiedostoilla, mutta on kehitetty nimenomaan wav-rakenteen lukemiseen). Toteutetut pakkausmenetelmät ovat [Lempel-Ziw-Welch (LWZ)](https://en.wikipedia.orga/wiki/Lempel–Ziv–Welch) ja [Huffman](https://en.wikipedia.org/wiki/Huffman_coding). Ohjelma toimii yksinkertaisena komentorivityökaluna yleisten unix-komentorivityökalujen konventioita seuraten. 
+Quick installing guide is provided below and more precise documentation can be found from documentation folder. 
 
-# Pikakäyttöohje ja komentorivikomennot
+# Quick install and usage guide
 
-Kloonaus:
+Cloning and starting
 ```
 git clone https://github.com/otahontas/javasynth.git
-mv wavcompressor
+mv archiver
 ```
 
-Asennus eli jarin generointi:
+Generating jar file:
 ```
 mvn package
 ```
 
-Ohjelman ajaminen asennuksen jälkeen:
+Running the program after generating jar
 ```
-cd target
-java -jar wavcompressor.jar
+java -jar target/archiver.jar
 ```
-*(Saat ohjeet näkyville ajamalla jar-tiedoston ilman parametreja)*
+*(Launching the program without parameters gives unix type guide for using the program)*
 
-Testit suoritetaan komennolla
+Tests can be run with command:
 ```
 mvn test
 ```
 
-Testikattavuusraportti luodaan komennolla
+Jacoco test coverage report can be created and examined with command:
 ```
 mvn jacoco:report
-```
-
-Kattavuusraporttia voi tarkastella esim.
-```
 open target/site/jacoco/index.html (MacOS)
-xdg-open target/site/jacoco/index.html (Useimmat linux-distrot)
+xdg-open target/site/jacoco/index.html (Most linux distros)
 ```
 
+# Documentation
+- [User guide](documentation/guide.md)
+- [Project definition](documentation/definition.md)
+- [Testing and performance documentation](documentation/testingandperformance.md)
+- [Implementdefinitionation document](documentation/implementation.md)
 
-# Dokumentaatio
-- [Käyttöhje](dokumentaatio/guide.md)
-- [Määrittelydokumentti](dokumentaatio/maarittelydokumentti.md)
-- [Testausdokumentti](dokumentaatio/testausdokumentti.md)
-- [Toteutus- ja suorituskykydokumentti](dokumentaatio/toteutusdokumentti.md)
-
-# Viikkoraportit
-- [Viikko 1](dokumentaatio/raportit/viikko1.md)
-- [Viikko 2](dokumentaatio/raportit/viikko2.md)
-- [Viikko 3](dokumentaatio/raportit/viikko3.md)
-- [Viikko 4](dokumentaatio/raportit/viikko4.md)
-- [Viikko 5](dokumentaatio/raportit/viikko5.md)
-- [Viikko 6](dokumentaatio/raportit/viikko6.md)
-
-# TODO:
-- Kirjoita uus määrittelydokkari
-- Kirjoita käyttöohje
-- Kirjoita testausdokkari
-- Kirjoita toteutus- ja suorituskykydokkari
-- Siisti metodeita
-- Kirjoita javadocit
-- Tee servicet valmiiksi
-- Testaa, testaa
-- Kirjoita metodit, joilla tehdä testivertailut javan ja omien tietorakenteiden välillä
+# TODO
+- LZW loppuun
+- HashMap loppuun
+- Varmista testit
+- CLI parser?
+    - http://tutorials.jenkov.com/java-howto/java-command-line-argument-parser.html
+    - https://github.com/jjenkov/cli-args
+- Chechstyle
+- Dokkarit
+    - Performance test
