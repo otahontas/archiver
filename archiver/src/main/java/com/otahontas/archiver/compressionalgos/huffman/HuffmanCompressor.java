@@ -1,10 +1,8 @@
 package com.otahontas.archiver.compressionalgos.huffman;
 
 import com.otahontas.archiver.compressionalgos.CompressionAlgo;
-import com.otahontas.archiver.compressionalgos.huffman.FrequencyCalculator;
 import com.otahontas.archiver.datastructures.huffman.MinimumPriorityQueue;
 import com.otahontas.archiver.datastructures.huffman.HuffmanTree;
-import com.otahontas.archiver.compressionalgos.huffman.CodeConstructor;
 import com.otahontas.archiver.datastructures.List;
 import com.otahontas.archiver.utils.Arrays;
 
@@ -190,14 +188,14 @@ public class HuffmanCompressor implements CompressionAlgo {
 
     private byte[] decodeData(List<Boolean> encodedData, HuffmanTree decodeTree) {
         
-        Node current = decodeTree.GetRoot();
+        Node current = decodeTree.getRoot();
         List<Byte> buffer = new List<>();
 
         for (int i = 0; i < encodedData.size(); i++) {
             current = encodedData.get(i) ? current.getRightChild() : current.getLeftChild();
             if (current.getLeftChild() == null && current.getRightChild() == null) {
                 buffer.add((byte) current.getValue());
-                current = decodeTree.GetRoot();
+                current = decodeTree.getRoot();
             } 
         }
 

@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.otahontas.archiver.compressionalgos.huffman.FrequencyCalculator;
-import com.otahontas.archiver.datastructures.huffman.MinimumPriorityQueue;
-import com.otahontas.archiver.datastructures.huffman.Node;
 import com.otahontas.archiver.datastructures.List;
 
 /**
@@ -32,7 +30,7 @@ public class HuffmanTreeTest {
         nodequeue = freqcalc.createNodeQueue(array);
         huffmantree.formHuffmanTree(nodequeue);
 
-        Node n = huffmantree.GetRoot();
+        Node n = huffmantree.getRoot();
 
         assertEquals(10+128, n.getValue());
     }
@@ -59,7 +57,7 @@ public class HuffmanTreeTest {
         nodequeue = freqcalc.createNodeQueue(array);
         huffmantree.formHuffmanTree(nodequeue);
 
-        Node n = huffmantree.GetRoot();
+        Node n = huffmantree.getRoot();
         Node leftmost = n.getLeftChild().getLeftChild().getLeftChild();
         Node rightmost = n.getRightChild().getRightChild();
 
@@ -88,7 +86,7 @@ public class HuffmanTreeTest {
         nodequeue = freqcalc.createNodeQueue(array);
         huffmantree.formHuffmanTree(nodequeue);
 
-        Node n = huffmantree.GetRoot();
+        Node n = huffmantree.getRoot();
         Node leftmost = n.getLeftChild();
         Node bottomLeft = n.getRightChild().getRightChild().getLeftChild().getLeftChild();
         Node bottomRight = n.getRightChild().getRightChild().getLeftChild().getRightChild();
@@ -120,8 +118,8 @@ public class HuffmanTreeTest {
         byte[] values = {10,66,68,69,65,67};
 
         huffmantree.formHuffmanTreeForDecoding(list, values);
-        Node leftmost = huffmantree.GetRoot().getLeftChild().getLeftChild().getLeftChild().getLeftChild();
-        Node rightmost = huffmantree.GetRoot().getRightChild().getRightChild();
+        Node leftmost = huffmantree.getRoot().getLeftChild().getLeftChild().getLeftChild().getLeftChild();
+        Node rightmost = huffmantree.getRoot().getRightChild().getRightChild();
 
         assertEquals(values[0],leftmost.getValue());
         assertEquals(values[values.length - 1],rightmost.getValue());
@@ -144,8 +142,8 @@ public class HuffmanTreeTest {
 
         byte[] values = {10,66,68,69,65,67};
         huffmantree.formHuffmanTreeForDecoding(list, values);
-        Node leftmost = huffmantree.GetRoot().getLeftChild().getLeftChild().getLeftChild().getLeftChild();
-        Node rightmost = huffmantree.GetRoot().getRightChild().getRightChild();
+        Node leftmost = huffmantree.getRoot().getLeftChild().getLeftChild().getLeftChild().getLeftChild();
+        Node rightmost = huffmantree.getRoot().getRightChild().getRightChild();
 
         assertNull(leftmost.getLeftChild());
         assertNull(leftmost.getRightChild());

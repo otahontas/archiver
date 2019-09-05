@@ -25,7 +25,7 @@ public class CodeConstructor {
         this.codewords = (List<Boolean>[]) new List[256];
         this.treePreOrder = new List<>();
         this.values = new List<>();
-        formCodeWords(hufftree.GetRoot(), new List<Boolean>());
+        formCodeWords(hufftree.getRoot(), new List<Boolean>());
         hufftree.setTreePreOrder(treePreOrder);
         hufftree.setValues(values);
     }

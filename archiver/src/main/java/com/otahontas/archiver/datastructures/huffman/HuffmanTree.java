@@ -33,8 +33,8 @@ public class HuffmanTree {
     }
     
     /**
-     * Construcs decoding tree from given list.
-     * List should contain huffman tree in preorder traversal order, marking
+     * Constructs decoding tree from given list.
+     * List should contain huffman tree in pre-order traversal order, marking
      * every node with value as true and nodes with no value as false.
      * Frequencies are not used and are set to 128.
      * Inserts 128 as value for every node that has no value.
@@ -76,7 +76,7 @@ public class HuffmanTree {
      * @return Root node
      * */
 
-    public Node GetRoot() {
+    public Node getRoot() {
         return root;
     }
 
@@ -116,8 +116,4 @@ public class HuffmanTree {
         return (byte) (values.size() - 128);
     }
 
-    @Override
-    public String toString() {
-
-    }
 }
