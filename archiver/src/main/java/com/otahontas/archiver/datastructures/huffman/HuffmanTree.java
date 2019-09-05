@@ -48,12 +48,14 @@ public class HuffmanTree {
         Node parent = root;
         int valuesIndex = 0;
         for (int i = 1; i < preorder.size(); i++) {
+            while (parent.getLeftChild() != null && parent.getRightChild() != null) {
+                parent = parent.getParent();
+            }
             if (preorder.get(i)) {
                 if (parent.getLeftChild() == null) {
-                    parent.setLeftChild(new Node(128,nodevalues[valuesIndex++]));
+                    parent.setLeftChild(new Node(128,nodevalues[valuesIndex++]+128));
                 } else {
-                    parent.setRightChild(new Node(128,nodevalues[valuesIndex++]));
-                    parent = parent.getParent();
+                    parent.setRightChild(new Node(128,nodevalues[valuesIndex++]+128));
                 }
             } else {
                 if (parent.getLeftChild() == null) {

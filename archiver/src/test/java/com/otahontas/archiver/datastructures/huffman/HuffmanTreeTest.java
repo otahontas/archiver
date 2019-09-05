@@ -121,8 +121,8 @@ public class HuffmanTreeTest {
         Node leftmost = huffmantree.getRoot().getLeftChild().getLeftChild().getLeftChild().getLeftChild();
         Node rightmost = huffmantree.getRoot().getRightChild().getRightChild();
 
-        assertEquals(values[0],leftmost.getValue());
-        assertEquals(values[values.length - 1],rightmost.getValue());
+        assertEquals(values[0],leftmost.getValue() - 128);
+        assertEquals(values[values.length - 1],rightmost.getValue() - 128);
     }
 
     @Test
