@@ -48,9 +48,7 @@ public class HuffmanCompressor implements CompressionAlgo {
         List<Boolean>[] codewords = constructor.getCodewords();
 
         List<Boolean> compressed = new List<>();
-        for (byte b : dataToCompress) {
-            compressed.extend(codewords[b + 128]);
-        }
+        for (byte b : dataToCompress) compressed.extend(codewords[b + 128]);
 
         byte[] header = collectHeaderInformationForCompression(compressed.size());
         byte[] huffmanTreeValues = hufftree.getValues();
@@ -79,25 +77,14 @@ public class HuffmanCompressor implements CompressionAlgo {
         byte[] nodevalues = new byte[header[1]];
         for (int i = 0; i < header[1]; i++) nodevalues[i] = dataToDecompress[i+4];
 
-        int headerAndValuesSize = 4 + nodevalues.length;
-        byte[] restBytes = new byte[dataToDecompress.length - headerAndValuesSize];
-        for (int i = 0; i < restBytes.length; i++) {
-            restBytes[i] = dataToDecompress[i + headerAndValuesSize];
-        }
-        List<Boolean> restBits = turnBytesToBits(restBytes);
-        restBits.removeLast(5);
+        int headerSize = 4 + nodevalues.length;
 
-        List<Boolean> huffmanTreeInPreOrder = new List<>();
-        List<Boolean> encodedData = new List<>();
-
-        for (int i = 0; i < header[0]; i++) huffmanTreeInPreOrder.add(restBits.get(i));
-
-        for (int i = header[0]; i < restBits.size(); i++) encodedData.add(restBits.get(i));
+        List<Boolean>[] extracted = extractHuffmanTreeAndData(header, headerSize, dataToDecompress);
 
         HuffmanTree hufftree = new HuffmanTree();
-        hufftree.formHuffmanTreeForDecoding(huffmanTreeInPreOrder, nodevalues);
+        hufftree.formHuffmanTreeForDecoding(extracted[0], nodevalues);
 
-        byte[] decompressedData = decodeData(encodedData, hufftree);
+        byte[] decompressedData = decodeData(extracted[1], hufftree);
 
         return decompressedData;
     }
@@ -191,10 +178,12 @@ public class HuffmanCompressor implements CompressionAlgo {
         Node current = decodeTree.getRoot();
         List<Byte> buffer = new List<>();
 
+// TODO: change the 128 adding to happen in different place so we don't have to fix this all the time
+
         for (int i = 0; i < encodedData.size(); i++) {
             current = encodedData.get(i) ? current.getRightChild() : current.getLeftChild();
             if (current.getLeftChild() == null && current.getRightChild() == null) {
-                buffer.add((byte) current.getValue());
+                buffer.add((byte) (current.getValue() + 128));
                 current = decodeTree.getRoot();
             } 
         }
@@ -206,5 +195,28 @@ public class HuffmanCompressor implements CompressionAlgo {
         }
 
         return decompressedData;
+    }
+
+    private List<Boolean>[] extractHuffmanTreeAndData(short[] header, int headerSize, 
+                                                      byte[] dataToDecompress) {
+        byte[] restBytes = new byte[dataToDecompress.length - headerSize];
+
+        for (int i = 0; i < restBytes.length; i++) {
+            restBytes[i] = dataToDecompress[i + headerSize];
+        }
+        List<Boolean> restBits = turnBytesToBits(restBytes);
+        restBits.removeLast(header[2]);
+
+        List<Boolean> huffmanTreeInPreOrder = new List<>();
+        List<Boolean> encodedData = new List<>();
+
+        for (int i = 0; i < header[0]; i++) huffmanTreeInPreOrder.add(restBits.get(i));
+
+        for (int i = header[0]; i < restBits.size(); i++) encodedData.add(restBits.get(i));
+
+        List<Boolean>[] extractedLists = (List<Boolean>[]) new List[2];
+        extractedLists[0] = huffmanTreeInPreOrder;
+        extractedLists[1] = encodedData;
+        return extractedLists;
     }
 }
