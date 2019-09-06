@@ -25,6 +25,7 @@ public class HashMap<K, V> {
      * @return true if found, else false
      */
     public boolean contains(K key) {
+        if (get(key) == null) return false;
         return true;
     }
 
@@ -133,12 +134,19 @@ public class HashMap<K, V> {
      * @return
      */
     private void copy(List<Pair<K,V>>[] newValues, int index) {
+        if (this.values[index] == null) {
+            return;
+        }
         for (int i = 0; i < this.values[index].size(); i++) {
             Pair<K, V> pair = this.values[index].get(i);
             int hash = getHash(pair.getKey());
 
             if (newValues[hash] == null) {
                 newValues[hash] = new List<>();
+            }
+
+            if (newValues[index] == null) {
+                newValues[index] = new List<>();
             }
 
             newValues[hash].add(pair);

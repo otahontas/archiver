@@ -1,9 +1,8 @@
 package com.otahontas.archiver.compressionalgos.lzw;
 
-import java.util.HashMap;
-
 import com.otahontas.archiver.compressionalgos.CompressionAlgo;
 import com.otahontas.archiver.datastructures.List;
+import com.otahontas.archiver.datastructures.lzw.HashMap;
 
 public class LZWCompressor implements CompressionAlgo {
 	/**
@@ -37,7 +36,7 @@ public class LZWCompressor implements CompressionAlgo {
             if (input < 0) input += 256;
             char inputAsChar = (char) input;
 
-            if (table.containsKey(temp + inputAsChar)) {
+            if (table.contains(temp + inputAsChar)) {
                 temp = temp + inputAsChar;
             } else {
                 String s12 = to12bit(table.get(temp));

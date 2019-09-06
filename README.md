@@ -28,11 +28,18 @@ Tests can be run with command:
 mvn test
 ```
 
-Jacoco test coverage report can be created and examined with command:
+Jacoco test coverage report can be created and examined with commands:
 ```
 mvn jacoco:report
 open target/site/jacoco/index.html (MacOS)
 xdg-open target/site/jacoco/index.html (Most linux distros)
+```
+
+Checkstyle code style coverage report can be created and examined with commands:
+```
+mvn jxr:jxr checkstyle:checkstyle
+open target/site/checkstyle.html (MacOS)
+xdg-open target/site/checkstyle.html (Most linux distros)
 ```
 
 # Documentation
