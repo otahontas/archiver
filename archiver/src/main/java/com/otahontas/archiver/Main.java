@@ -12,7 +12,8 @@ public class Main {
 
     /**
      * Main method gets CLI arguments, passes them to parser and calls 
-     * compressorservice or stops program depenging on CLI arguments.
+     * compressorservice or stops program depenging on parameters returned
+     * from parser
      * @param args Command line arguments
      */
 
