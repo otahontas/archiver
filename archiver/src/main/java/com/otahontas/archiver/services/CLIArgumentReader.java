@@ -75,7 +75,7 @@ public class CLIArgumentReader {
         final String info = "A CLI tool to compress and uncompress wav files";
         final String usage =
             "Usage: java -jar archiver.jar [-opts] source dest\n"
-            +"e.g. java -jar archiver.jar -lc orig.wav comp.wav\n\n"
+            +"e.g. java -jar archiver.jar -lc orig.wav compressed\n\n"
             +"Define algoritmh and desired functionality with opts:\n"
             +"-l Use LZW compression \t -h Use Huffman compression\n"
             +"-c Compress file \t -e Exctract file\n\n"

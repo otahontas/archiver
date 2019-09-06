@@ -86,10 +86,6 @@ public class HuffmanCompressor implements CompressionAlgo {
         return decodeData(extracted[1], hufftree);
     }
 
-    /* === PRIVATE METHODS == */
-
-    // TODO: make module for these?
-
     /**
      * Collects header information for compression and returns them as byte array
      *
@@ -152,12 +148,8 @@ public class HuffmanCompressor implements CompressionAlgo {
         return header;
     }
 
-    // TODO: And also for these?
-
     /**
      * Turn byte array into corresponding list of bits represented as booleans
-     * Should be optimized more, since uses string conversion at the moment
-     *
      * @param restBytes
      * @return
      */
@@ -165,13 +157,12 @@ public class HuffmanCompressor implements CompressionAlgo {
     private List<Boolean> turnBytesToBits(byte[] restBytes) {
         List<Boolean> bits = new List<>();
         for (byte b : restBytes) {
-            String s = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) == '1') {
-                    bits.add(true);
-                } else {
-                    bits.add(false);
-                }
+            boolean[] result = new boolean[8];
+            for (int i = 0; i < 8; i++) {
+                result[i] = (b & (1 << i)) == 0 ? false : true;
+            }
+            for (int i = 7; i >= 0; i--) {
+                bits.add(result[i]);
             }
         }
         return bits;

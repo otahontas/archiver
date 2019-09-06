@@ -30,6 +30,7 @@ public class CompressorService {
     /**
      * Goes through given parameters and calls correct compressor.
      * Errors for FileIO and possible filenames are also handled here
+     * Adds .compressed -extension to filename
      * @param params
      */
 
@@ -53,10 +54,15 @@ public class CompressorService {
 
         byte[] newData = new byte[0];
 
+        switch (algo) {
+            case 'l':   compressor = new LZWCompressor();
+            case 'h':   compressor = new HuffmanCompressor();
+        }
+
         switch (command) {
-            case 'c':   newData = compress(algo, dataBytearray);
+            case 'c':   newData = compress(dataBytearray);
                         break;
-            case 'e':   newData = extract(algo, dataBytearray);
+            case 'e':   newData = extract(dataBytearray);
                         break;
         }
 
@@ -66,7 +72,8 @@ public class CompressorService {
         }
 
         try {
-            f.writeFile(output + ".compressed", newData);
+            if (command == 'c') output += ".compressed";
+            f.writeFile(output, newData);
         } catch (IOException ioe) {
             System.out.println("Couldn't write the file, see error below:");
             System.out.println(ioe);
@@ -74,32 +81,22 @@ public class CompressorService {
     }
 
     /**
-     * Calls compressor based on given algoritmh
-     * @param algo Character representing Huffman or LZW
+     * Calls compressor method based on given algoritmh
      * @param dataBytearray Data to be compressed as byte array
      * @return Compressed data as byte array
      */
 
-    private byte[] compress(char algo, byte[] dataByteArray) {
-        switch (algo) {
-            case 'l':   compressor = new LZWCompressor();
-            case 'h':   compressor = new HuffmanCompressor();
-        }
+    private byte[] compress(byte[] dataByteArray) {
         return compressor.compress(dataByteArray);
     }
 
     /**
-     * Calls compressor based on given algoritmh
-     * @param algo Character representing Huffman or LZW
+     * Calls decompressor method based on given algoritmh
      * @param dataBytearray Data to be decompressed as byte array
      * @return Decompressed data as byte array
      */
 
-    private byte[] extract(char algo, byte[] dataByteArray) {
-        switch (algo) {
-            case 'l':   compressor = new LZWCompressor();
-            case 'h':   compressor = new HuffmanCompressor();
-        }
-        return compressor.compress(dataByteArray);
+    private byte[] extract(byte[] dataByteArray) {
+        return compressor.decompress(dataByteArray);
     }
 }
