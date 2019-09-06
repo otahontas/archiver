@@ -34,7 +34,7 @@ public class CompressorService {
      * @param params
      */
 
-    public void run(String params[]) {
+    public void run(String[] params) {
         char command = params[0].charAt(0);
         char algo = params[1].charAt(0);
         String source = params[2];

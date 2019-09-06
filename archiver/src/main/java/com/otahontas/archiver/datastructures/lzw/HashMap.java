@@ -25,8 +25,7 @@ public class HashMap<K, V> {
      * @return true if found, else false
      */
     public boolean contains(K key) {
-        if (get(key) == null) return false;
-        return true;
+        return get(key) != null;
     }
 
 

@@ -26,14 +26,14 @@ public class FileIOTest {
     }
 
     @Test
-    public void returnsArrayWhenReachingForRealFile() throws IOException, NoSuchFileException {
+    public void returnsArrayWhenReachingForRealFile() throws IOException {
         byte[] array = f.readFile("testfiles/smalltestwithtext");
 
         assertNotEquals(0, array.length);
     }
 
     @Test
-    public void doesNotOverWriteFileWhenFileExists() throws IOException, NoSuchFileException {
+    public void doesNotOverWriteFileWhenFileExists() throws IOException {
         byte[] original = f.readFile("testfiles/smalltestwithtext");
         byte[] writethis = {64, 64, 64, 64};
         f.writeFile("testfiles/smalltestwithtext", writethis);

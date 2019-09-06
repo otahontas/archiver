@@ -1,0 +1,10 @@
+com.otahontas.archiver
+com.otahontas.archiver.compressionalgos
+com.otahontas.archiver.compressionalgos.huffman
+com.otahontas.archiver.compressionalgos.lzw
+com.otahontas.archiver.datastructures
+com.otahontas.archiver.datastructures.huffman
+com.otahontas.archiver.datastructures.lzw
+com.otahontas.archiver.performancetesting
+com.otahontas.archiver.services
+com.otahontas.archiver.utils

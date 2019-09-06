@@ -159,7 +159,7 @@ public class HuffmanCompressor implements CompressionAlgo {
         for (byte b : restBytes) {
             boolean[] result = new boolean[8];
             for (int i = 0; i < 8; i++) {
-                result[i] = (b & (1 << i)) == 0 ? false : true;
+                result[i] = (b & (1 << i)) != 0;
             }
             for (int i = 7; i >= 0; i--) {
                 bits.add(result[i]);

@@ -50,8 +50,8 @@ public class CodeConstructorTest {
         String codewordForCharF = buildCodeWordFromList(codewordForCharFAsList);
 
 
-        assertEquals("0", codewordForCharA.toString());
-        assertEquals("1100", codewordForCharF.toString());
+        assertEquals("0", codewordForCharA);
+        assertEquals("1100", codewordForCharF);
     }
 
     @Test
