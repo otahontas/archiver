@@ -36,7 +36,7 @@ public class FileIOTest {
     public void doesNotOverWriteFileWhenFileExists() throws IOException, NoSuchFileException {
         byte[] original = f.readFile("testfiles/smalltestwithtext");
         byte[] writethis = {64, 64, 64, 64};
-        f.writeFile("testfiles/aaaa.txt", writethis);
+        f.writeFile("testfiles/smalltestwithtext", writethis);
         byte[] expectToBeSame = f.readFile("testfiles/smalltestwithtext");
         assertArrayEquals(original, expectToBeSame);
     }

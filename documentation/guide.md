@@ -20,4 +20,6 @@ Launching the program without parameters gives unix type guide for using the pro
 - Then give two filenames as parameters: first one should be path to source file (either relative or absolute), second one is the name (or full path) to output file. Program automatically adds .compressed -extension to output file, when compressing.
 - You can also pass -p flag to run basic performance tests.
 
-Program should be able to handle all kinds of files, since it reads files on byte level and does the compression by calculating bytes. Still, there are some bugs happening, especially with LZW implementation. You can read more about the bugs from [implementation document](implementation.md).
+Program should be able to handle all kinds of files, since it reads files on byte level and does the compression by calculating bytes. If program was installed by cloning and building, there are some testfiles in archiver/testfiles folder, also found [from here in the repo](archiver/testfiles).
+
+There are some bugs happening, especially with LZW implementation. You can read more about them from [implementation document](implementation.md).

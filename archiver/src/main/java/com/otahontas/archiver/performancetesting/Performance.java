@@ -7,6 +7,7 @@ import com.otahontas.archiver.compressionalgos.huffman.HuffmanCompressor;
 
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
+import java.util.Scanner;
 
 public class Performance {
     private FileIO f;
@@ -14,18 +15,35 @@ public class Performance {
 
     public void runTests() {
         this.f = new FileIO();
-        String[] filenames = { 
-            "testfiles/smalltestwithtext",
-            "testfiles/smalltestwithwav",
-            "testfiles/mediumtestwithtext",
-            "testfiles/largetestwithwav",
-            "testfiles/largetestwithtext", 
-            "testfiles/testwithrandomfile"
-        };
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            System.out.println("Select which type of test to run by giving number:\n"
+                               +"1 - test with different file types\n"
+                               +"2 - linear test with doubling file size\n"
+                               +"0 - quit");
+            String s = scan.nextLine();
+            if (s.equals("0")) {
+                break;
+            } else if (s.equals("1")) {
+                String[] filenames = { 
+                    "testfiles/smalltestwithtext",
+                    "testfiles/smalltestwithwav",
+                    "testfiles/mediumtestwithtext",
+                    "testfiles/largetestwithwav",
+                    "testfiles/largetestwithtext", 
+                    "testfiles/testwithrandomfile"
+                };
 
-        for (String file : filenames) {
-            runIndividualTest(file);
+                for (String file : filenames) {
+                    runIndividualTest(file);
+                }
+            } else if (s.equals("2")) {
+                for (int i = 1; i <= 12; i++) {
+                    runIndividualTest("testfiles/lineartesting/" + i);
+                }
+            }
         }
+        scan.close();
     }
 
     public void runIndividualTest(String filename) {

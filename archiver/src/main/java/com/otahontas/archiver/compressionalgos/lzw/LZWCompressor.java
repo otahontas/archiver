@@ -171,10 +171,9 @@ compressedData.add(buffer[b]);
 
 	/**
 	 * Extract the 12 bit key from 2 bytes and get the int value of the key
-	 * 
-	 * @param b1
-	 * @param b2
-	 * @param onleft
+	 * @param b1 byte one
+	 * @param b2 byte two
+	 * @param onleft 
 	 * @return an Integer which holds the value of the key
 	 */
 	public int getvalue(byte b1, byte b2, boolean onleft) {
