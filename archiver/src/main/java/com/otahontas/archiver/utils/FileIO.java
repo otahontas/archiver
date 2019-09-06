@@ -26,14 +26,18 @@ public class FileIO {
 
     /**
      * Writes file as given filename
+     * Also checks if there is already a file and in that case doesn't overwrite it
      * @param filename Path to file
      * @param bytesToWrite Array of bytes to write to file
      * @throws IOException when writing fails
      */
 
-    // TODO: throw exception when file already exists
-
     public void writeFile(String filename, byte[] bytesToWrite) throws IOException {
-        Files.write(Paths.get(filename), bytesToWrite, StandardOpenOption.CREATE);
+        if (Files.notExists(Paths.get(filename))) {
+            Files.write(Paths.get(filename), bytesToWrite, StandardOpenOption.CREATE);
+        } else {
+            System.out.println("File " + Paths.get(filename).toString() + " already "
+                    + "exists. Give new name for output.");
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.otahontas.archiver.compressionalgos.lzw;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import com.otahontas.archiver.compressionalgos.CompressionAlgo;
 import com.otahontas.archiver.datastructures.List;

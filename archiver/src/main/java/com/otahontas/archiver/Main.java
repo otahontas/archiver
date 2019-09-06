@@ -1,18 +1,34 @@
 package com.otahontas.archiver;
 
-import com.otahontas.archiver.compressionalgos.lzw.LZWCompressor;
-import com.otahontas.archiver.compressionalgos.huffman.HuffmanCompressor;
-import com.otahontas.archiver.utils.FileIO;
 import com.otahontas.archiver.services.CLIArgumentReader;
+import com.otahontas.archiver.services.CompressorService;
+import com.otahontas.archiver.performancetesting.Performance;
+
+/**
+ * Main class for Archiver program
+ * */
 
 public class Main {
 
-    public static void main(String[] args) {
-        LZWCompressor lzw = new LZWCompressor();
-        HuffmanCompressor h = new HuffmanCompressor();
-        FileIO f = new FileIO();
+    /**
+     * Main method gets CLI arguments, passes them to parser and calls 
+     * compressorservice or stops program depenging on CLI arguments.
+     * @param args Command line arguments
+     */
 
-        CLIArgumentReader cli = new CLIArgumentReader(lzw, h, f);
-        cli.run(args);
+    public static void main(String[] args) {
+        CompressorService cs = new CompressorService();
+        CLIArgumentReader cli = new CLIArgumentReader();
+
+        String[] arguments = cli.parse(args);
+
+        switch(arguments.length) {
+            case(1):    Performance p = new Performance();
+                        p.runTests();
+                        break;
+            case(4):    cs.run(arguments);
+                        break;
+        }
+
     }
 }

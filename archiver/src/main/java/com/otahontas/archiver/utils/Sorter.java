@@ -7,13 +7,15 @@ package com.otahontas.archiver.utils;
 public class Sorter {
 
     /**
-     * Copies array, sorts it and returns new sorted array
+     * Copies char array, sorts it and returns new sorted array
+     * Uses basic selection sort for max input size of ~20.
      * @param original Array to be sorted
+     * @return Sorted array
      * */
 
-    public int[] sortArray(int[] original) {
+    public char[] sortCharArray(char[] original) {
         int l = original.length;
-        int[] nums = new int[l];
+        char[] nums = new char[l];
 
         for (int i = 0; i < l; i++) nums[i] = original[i];
 
@@ -26,7 +28,7 @@ public class Sorter {
 	    			smallest = nums[check];
 	    		}
 	    	}
-	    	int temp = nums[currentPlace];
+	    	char temp = nums[currentPlace];
 	    	nums[currentPlace] = nums[smallestAt];
 	    	nums[smallestAt] = temp;
 	    }
