@@ -27,7 +27,7 @@ public class CodeConstructor {
     }
 
     public void constructCodeWordsPreorderAndNodeValues(HuffmanTree hufftree) {
-        formCodeWordsRecursively(hufftree.getRoot(), new List<Boolean>());
+        formCodeWordsRecursively(hufftree.getRoot(), new List<>());
         hufftree.setTreePreOrder(treePreOrder);
         hufftree.setValues(values);
     }

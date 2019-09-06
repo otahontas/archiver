@@ -1,4 +1,4 @@
-package com.otahontas.archiver.datastructures;
+package com.otahontas.archiver.datastructures.lzw;
 
 import com.otahontas.archiver.datastructures.List;
 import com.otahontas.archiver.datastructures.Pair;

@@ -1,14 +1,14 @@
 package com.otahontas.archiver.services;
 
+
+import com.otahontas.archiver.compressionalgos.lzw.LZWCompressor;
+import com.otahontas.archiver.compressionalgos.huffman.HuffmanCompressor;
+import com.otahontas.archiver.utils.FileIO;
+
 /**
  * Class that reads cli arguments and passes them to service for handling
  * compression or extraction
  * */
-
-import com.otahontas.archiver.services.CompressorService;
-import com.otahontas.archiver.compressionalgos.lzw.LZWCompressor;
-import com.otahontas.archiver.compressionalgos.huffman.HuffmanCompressor;
-import com.otahontas.archiver.utils.FileIO;
 
 public class CLIArgumentReader {
 

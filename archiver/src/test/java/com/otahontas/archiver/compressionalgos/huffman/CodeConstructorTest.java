@@ -44,29 +44,14 @@ public class CodeConstructorTest {
         constructor.constructCodeWordsPreorderAndNodeValues(huffmantree);
         codewords = constructor.getCodewords();
 
-        String codeWordForCharA = "";
-        List<Boolean> wordAsList = codewords[65+128];
+        List<Boolean> codewordForCharAAsList = codewords[65+128];
+        List<Boolean> codewordForCharFAsList = codewords[70+128];
+        String codewordForCharA = buildCodeWordFromList(codewordForCharAAsList);
+        String codewordForCharF = buildCodeWordFromList(codewordForCharFAsList);
 
-        for (int i = 0; i < wordAsList.size();i++) {
-                if (wordAsList.get(i)) {
-                    codeWordForCharA += "1";
-                } else {
-                    codeWordForCharA += "0";
-                }
-        }
 
-        String codeWordForCharF = "";
-        wordAsList = codewords[70+128];
-        for (int i = 0; i < wordAsList.size();i++) {
-                if (wordAsList.get(i)) {
-                    codeWordForCharF += "1";
-                } else {
-                    codeWordForCharF += "0";
-                }
-        }
-
-        assertEquals("0", codeWordForCharA);
-        assertEquals("1100", codeWordForCharF);
+        assertEquals("0", codewordForCharA.toString());
+        assertEquals("1100", codewordForCharF.toString());
     }
 
     @Test
@@ -79,19 +64,14 @@ public class CodeConstructorTest {
         constructor.constructCodeWordsPreorderAndNodeValues(huffmantree);
         codewords = constructor.getCodewords();
 
-        for (int j = 0; j < codewords.length; j++) {
-            if (codewords[j] == null) continue;
-            List<Boolean> wordAsList = codewords[j];
+        List<Boolean> codeword84AsList = codewords[84+128];
+        String codewordForByte84 = buildCodeWordFromList(codeword84AsList);
 
-            String s = "";
-            for (int i = 0; i < wordAsList.size();i++) {
-                    if (wordAsList.get(i)) {
-                        s += "1";
-                    } else {
-                        s += "0";
-                    }
-            }
-        }
+        List<Boolean> codeword111AsList = codewords[111+128];
+        String codewordForByte111 = buildCodeWordFromList(codeword111AsList);
+
+        assertEquals("11111", codewordForByte84);
+        assertEquals("01", codewordForByte111);
     }
 
     @Test
@@ -104,15 +84,15 @@ public class CodeConstructorTest {
         constructor.constructCodeWordsPreorderAndNodeValues(huffmantree);
         List<Boolean> preorder = huffmantree.getTreePreOrder();
 
-        String preorderAsString = "";
+        StringBuilder preorderAsString = new StringBuilder();
         for (int i = 0; i < preorder.size() ;i++) {
             if (preorder.get(i)) {
-                preorderAsString += "1";
+                preorderAsString.append(1);
             } else {
-                preorderAsString += "0";
+                preorderAsString.append(0);
             }
         }
-        //assertEquals("00001101100110110011011", preorderAsString);
+        assertEquals("00110001110010110011011", preorderAsString.toString());
     }
 
     @Test
@@ -126,8 +106,21 @@ public class CodeConstructorTest {
         byte[] values = huffmantree.getValues();
 
         assertEquals(12,values.length);
-        //assertEquals(106, values[0]);
-        //assertEquals(121, values[7]);
-        //assertEquals(111, values[11]);
+        assertEquals(101, values[0]);
+        assertEquals(121, values[7]);
+        assertEquals(84, values[11]);
+    }
+
+
+    private String buildCodeWordFromList(List<Boolean> list) {
+        StringBuilder codeword = new StringBuilder();
+        for (int i = 0; i < list.size();i++) {
+            if (list.get(i)) {
+                codeword.append(1);
+            } else {
+                codeword.append(0);
+            }
+        }
+        return codeword.toString();
     }
 }

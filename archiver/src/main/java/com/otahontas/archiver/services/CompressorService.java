@@ -56,8 +56,7 @@ public class CompressorService {
 
     private byte[] compress(char algo, byte[] dataBytearray) {
         switch (algo) {
-            case 'l':   lzw.compress();
-                        break;
+            case 'l':   return lzw.compress(dataBytearray);
             case 'h':   return huffman.compress(dataBytearray);
         }
         return new byte[0];
@@ -65,8 +64,7 @@ public class CompressorService {
 
     private byte[] extract(char algo, byte[] dataBytearray) {
         switch (algo) {
-            case 'l':   lzw.compress();
-                        break;
+            case 'l':   return lzw.decompress(dataBytearray);
             case 'h':   return huffman.decompress(dataBytearray);
         }
         return new byte[0];

@@ -51,8 +51,7 @@ public class MinimumPriorityQueue {
      */
 
     public boolean isEmpty() {
-        if (this.size == 0) return true;
-        return false;
+        return this.size == 0;
     }
 
     /**

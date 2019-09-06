@@ -75,7 +75,7 @@ public class HuffmanTreeTest {
 
     @Test
     public void treeIsBuildCorrectlyWithEvenNumberOfElements() {
-        byte array[] = new byte[100];
+        byte[] array = new byte[100];
         for (int i = 0; i < 45; i++) array[i] = 65;
         for (int i = 45; i < 58; i++) array[i] = 66;
         for (int i = 58; i < 70; i++) array[i] = 67;

@@ -83,9 +83,7 @@ public class HuffmanCompressor implements CompressionAlgo {
         HuffmanTree hufftree = new HuffmanTree();
         hufftree.formHuffmanTreeForDecoding(extracted[0], nodevalues);
 
-        byte[] decompressedData = decodeData(extracted[1], hufftree);
-
-        return decompressedData;
+        return decodeData(extracted[1], hufftree);
     }
 
     /* === PRIVATE METHODS == */
