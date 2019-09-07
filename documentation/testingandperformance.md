@@ -127,7 +127,7 @@ I also conducted some tests following [yussiv's documentation from same kind of 
 
 As we can see LZW is quite superior to Huffman regarding compression ratio. Huffman is a little bit faster, but at this level it doesn't really matter. 
 
-Both of these tests above can be run again by using -p flag when running the program from CLI (e.g. "java -jar archiver.jar -p").
+Both of these tests above can be run again by using -p flag when running the program from CLI (e.g. "java -jar archiver.jar -p"). Note that you need to have testfiles-folder clone to project root when running the tests.
 
 ## Big files
 
