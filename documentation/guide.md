@@ -1,6 +1,6 @@
 # Guide
 
-To use this program, you need to have Java (at least version 8) installed. Installing the program can be done either by cloning and building or by downloading executable jar-file from [Releases](https://github.com/otahontas/javasynth/releases/tag/wavcompressor.jar). If you want to clone and build, you need to also have [Apache Maven](https://maven.apache.org/) installed. 
+To use this program, you need to have Java (at least version 8) installed. Installing the program can be done either by cloning and building or by downloading executable jar-file from [Releases](https://github.com/otahontas/javasynth/releases/latest/). If you want to clone and build, you need to also have [Apache Maven](https://maven.apache.org/) installed. 
 
 Cloning this repo and building executable jar file can be done as follows:
 ```
