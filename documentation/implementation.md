@@ -26,7 +26,7 @@ Method is a bit slow and code doesn't look that clear, since time kinda ran out 
 
 ### Utils and services
 
-File reading and writing are done with IO util, which is essentially a wrapper for Java NIO package. IO stuff is handled on byte level and class allows program to read and write files as byte arrays. Arrays, Sorter and Math classes include very few methods relevant to the topic: array concatenation for Huffman compression, selection sort for handling command line arguments and Math for HashMap hashing. 
+File reading and writing are done with IO util, which is essentially a wrapper for Java NIO package. IO stuff is handled on byte level and class allows program to read and write files as byte arrays. Arrays, Sorter and Math classes include very few methods relevant to the topic, just basically array concatenation for Huffman compression, selection sort for handling command line arguments and Math for HashMap hashing. 
 
 Services are not that important regarding algo or data structure implementations, but are rather useful by cleaning program handling and making program quite easily extendable. CompressorService for example could be extended to take different kind of other compressor algos as arguments (by constructor overloading) or extended by making different version which uses only Java data structures instead of self-written.
  
