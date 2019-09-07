@@ -139,6 +139,6 @@ Comparing LZW, Huffman and unix zip-program with random 10 MB file created with 
 
 ## Closing
 
-Regarding compression efficiency, performance and their balance, I'm quite happy with the final results. It seems that LZW is quite more powerful on text files that have a lot of repeating bytes (this is quite expected since it's a bit more efficient on paper), but huffman reaches better results on files with more random byte distribution. My huffman implementation is a little bit faster than LZW, eventhough they're both on same O(n log n) level on paper. This might be related to too slow Java implementation, which uses Strings, rather than Bit arrays. 
+Regarding compression efficiency, performance and their balance, I'm quite happy with the final results. It seems that LZW is quite more powerful on text files that have a lot of repeating bytes (this is quite expected since it's a bit more efficient on paper), but huffman reaches better results on files with more random byte distribution. My huffman implementation is a little bit faster than LZW, eventhough they're both on same O(n log n) level on paper. This might be related to too slow LZW implementation, which uses Strings, rather than Bit arrays. 
 
 Both algoritmhs have their upsides and downsides and with a little bit of tweaking and some heurestics, this tool could be modified to always use best algo for certain filetypes. So not bad, at least comparing to how much time I was able to put on this project.
