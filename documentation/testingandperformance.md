@@ -88,7 +88,7 @@ Program contains class for testing purposes, which can be run by giving -p flag 
 ==================================
 ```
 
-I also conducted some tests following [yussiv's documentation from same kind of project](https://github.com/yussiv/Compress/blob/master/documentation/performance.md). Testing was conducted by using text files created by multiplying original 512 byte text file. Testing was not with same performance testing class as test above and result were following:
+I also conducted some tests following [yussiv's documentation from same kind of project](https://github.com/yussiv/Compress/blob/master/documentation/performance.md). Testing was conducted by using text files created by multiplying original 512 byte text file. Testing was done with same performance testing class as which used above. Results were following:
 
 ## Huffman
 
