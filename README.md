@@ -9,7 +9,7 @@ Quick installing guide is provided below and more precise documentation can be f
 Cloning and starting
 ```
 git clone https://github.com/otahontas/archiver-java.git
-cd archiver-java
+cd src
 ```
 
 Generating jar file:
