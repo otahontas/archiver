@@ -1,6 +1,6 @@
 # Testing and program performance
 
-Program contains class for testing purposes, which can be run by giving -p flag to program without other parameters. Test includes running both algorithms against different type of files with filesize from 10 kB to 10 mB. Output was following when run with 2,8 Ghz i7 Macbook Pro 2017:
+Program can be launched with testing mode enabled by giving it -p flag and no other parameters. Test includes running both algorithms against different type of files with filesize from 10 kB to 10 mB. Output was following when run with 2,8 Ghz i7 Macbook Pro 2017:
 
 ```
 ====== RUNNING TESTS FOR FILE: testfiles/smalltestwithtext ======
@@ -127,8 +127,6 @@ I also conducted some tests following [yussiv's documentation from same kind of 
 
 As we can see LZW is quite superior to Huffman regarding compression ratio. Huffman is a little bit faster, but at this level it doesn't really matter. 
 
-Both of these tests above can be run again by using -p flag when running the program from CLI (e.g. "java -jar archiver.jar -p"). Note that you need to have testfiles-folder clone to project root when running the tests.
-
 ## Big files
 
 Comparing LZW, Huffman and unix zip-program with random 10 MB file created with "base64 /dev/urandom | head -c 10000000 > file.txt"
@@ -140,5 +138,3 @@ Comparing LZW, Huffman and unix zip-program with random 10 MB file created with 
 ## Closing
 
 Regarding compression efficiency, performance and their balance, I'm quite happy with the final results. It seems that LZW is quite more powerful on text files that have a lot of repeating bytes (this is quite expected since it's a bit more efficient on paper), but huffman reaches better results on files with more random byte distribution. My huffman implementation is a little bit faster than LZW, eventhough they're both on same O(n log n) level on paper. This might be related to too slow LZW implementation, which uses Strings, rather than Bit arrays. 
-
-Both algoritmhs have their upsides and downsides and with a little bit of tweaking and some heurestics, this tool could be modified to always use best algo for certain filetypes. So not bad, at least comparing to how much time I was able to put on this project.

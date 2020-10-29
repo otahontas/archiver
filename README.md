@@ -28,23 +28,17 @@ Tests can be run with command:
 mvn test
 ```
 
-Jacoco test coverage report can be created and examined with commands:
+Jacoco test coverage report can be created with:
 ```
 mvn jacoco:report
-open target/site/jacoco/index.html (MacOS)
-xdg-open target/site/jacoco/index.html (Most linux distros)
 ```
 
 Checkstyle code style coverage report can be created and examined with commands:
 ```
 mvn jxr:jxr checkstyle:checkstyle
-open target/site/checkstyle.html (MacOS)
-xdg-open target/site/checkstyle.html (Most linux distros)
 ```
 
 # Documentation
-- [User guide](documentation/guide.md)
-- [Project definition](documentation/definition.md)
-- [Testing and performance documentation](documentation/testingandperformance.md)
 - [Implementation document](documentation/implementation.md)
-- [Javadocs](https://htmlpreview.github.io/?https://github.com/otahontas/javasynth/blob/master/documentation/javadoc/index.html)
+- [User guide](documentation/guide.md)
+- [Testing and performance documentation](documentation/testingandperformance.md)

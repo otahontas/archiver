@@ -22,4 +22,4 @@ Launching the program without parameters gives unix type guide for using the pro
 
 Program should be able to handle all kinds of files, since it reads files on byte level and does the compression by calculating bytes. If program was installed by cloning and building, there are some testfiles in archiver/testfiles folder, also found [from here in the repo](archiver/testfiles).
 
-There are some bugs happening, especially with LZW implementation. You can read more about them from [implementation document](implementation.md).
+There are some known bugs, especially with LZW implementation. You can read more about them from [implementation document](implementation.md).
