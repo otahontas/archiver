@@ -42,3 +42,6 @@ mvn jxr:jxr checkstyle:checkstyle
 - [Implementation document](documentation/implementation.md)
 - [User guide](documentation/guide.md)
 - [Testing and performance documentation](documentation/testingandperformance.md)
+
+# TODO
+- fix lzw implementation
