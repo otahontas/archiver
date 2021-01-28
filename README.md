@@ -45,3 +45,5 @@ mvn jxr:jxr checkstyle:checkstyle
 
 # TODO
 - fix lzw implementation
+- Add license
+- Archive project and create note that it will not be updated after accomplishing tasks above
