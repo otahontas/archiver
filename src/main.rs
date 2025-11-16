@@ -1,3 +1,4 @@
+use archiver::performance::Performance;
 use archiver::services::{CLIArgumentReader, CompressorService};
 use std::env;
 
@@ -11,8 +12,8 @@ fn main() {
 
     match arguments.len() {
         1 => {
-            // Performance tests not implemented in Rust version
-            println!("Performance tests not implemented in this Rust version");
+            let p = Performance::new();
+            p.run_tests();
         }
         4 => {
             cs.run(&arguments);
